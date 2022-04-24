@@ -8,6 +8,7 @@
     - smbmap -H 10.10.10.100
     - smbclient -L 10.10.10.100
     - nmap --script smb-enum-shares -p 139,445 10.10.10.100
+    - crackmapexec smb 10.10.10.175 --shares
 ====================================================================================
 #Check for Vulnerabilities 
     - nmap --script smb-vuln* -p 139,445 10.10.10.100
@@ -16,6 +17,10 @@
     - smbclient \\\\10.10.10.100\\tmp      (NULL SESSION)
     - smbclient //10.10.10.100/tmp         (NULL SESSION)
     - rpcclient -U "" -N 10.10.10.100      (NULL SESSION) ( -U "" -null session, -N -no password)
+        rpcclient $> enumdomusers
+        rpcclient $> enumdomgroups
+        rpcclient $> querygroup 0x200
+        rpcclient $> queryuser 0x1f4
     - smbmap -H 10.10.10.100 -d active.htb -u 'SVC_TGS' -p 'GPPstillStandingStrong2k18'
     - smbclient //10.10.10.100/Users -U active.htb\\SVC_TGS%GPPstillStandingStrong2k18
     - smbclient //10.10.10.100/Users -U active.htb/SVC_TGS%GPPstillStandingStrong2k18
