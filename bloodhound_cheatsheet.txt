@@ -1,0 +1,5 @@
+#initialize neo4j
+    - sudo neo4j console
+#run bloodhound
+    - ./BloodHound --no-sandbox
+    - ./Sharphound.exe -c all --domain htb.local --ldapusername test --ldappassword test --zipfilename test.zip
