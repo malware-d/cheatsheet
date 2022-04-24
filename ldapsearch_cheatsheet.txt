@@ -1,5 +1,6 @@
 #LdapSearch Naming Context Dump - check the domain name, which was exposed after using nmap
     - ldapsearch -h 10.10.10.100 -x -s base namingcontexts
+    - ldapsearch -h 10.10.10.175 -x -b 'DC=EGOTISTICAL-BANK,DC=LOCAL'     (Use searchbase as the starting point for the search instead of the default)
 ===========================================================================================
 #create list of users
     - ldapsearch -x -h 10.10.10.100 -p 389 -D 'SVC_TGS' -w 'GPPstillStandingStrong2k18' -b "dc=active,dc=htb"   |  grep sAMAccountName | cut -d: -f2 | awk '{print $1}'
