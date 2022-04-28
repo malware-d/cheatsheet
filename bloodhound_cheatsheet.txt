@@ -1,5 +1,15 @@
 #initialize neo4j
     - sudo neo4j console
+================================================================================================================
 #run bloodhound
     - ./BloodHound --no-sandbox
     - ./Sharphound.exe -c all --domain htb.local --ldapusername test --ldappassword test --zipfilename test.zip
+================================================================================================================
+#In case, we have credential but winrm doesn't be supported -> we can't login and upload BloodHound ingestor to machine
+    - root@kali# bloodhound-python -c ALL -u support -p '#00^BlackKnight' -d blackfield.local -dc dc01.blackfield.local -ns 10.10.10.192
+        -c ALL - All collection methods
+        -u support -p #00^BlackKnight - Username and password to auth as
+        -d blackfield.local - domain name
+        -dc dc01.blackfield.local - DC name (it won’t let you use an IP here)
+        -ns 10.10.10.192 - use 10.10.10.192 as the DNS server
+    
