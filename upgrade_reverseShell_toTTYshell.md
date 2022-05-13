@@ -66,4 +66,13 @@ $ reset
 $ export SHELL=bash
 $ export TERM=xterm-256color
 $ stty rows <num> columns <cols>
+
+# With script
+script /dev/null -c bash
+Ctrl+Z
+stty raw -echo; fg
+            reset
+reset: unknown terminal type unknown
+Terminal type? screen
+
 ```
