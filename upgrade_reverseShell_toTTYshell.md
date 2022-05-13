@@ -31,15 +31,15 @@ echo os.system('/bin/bash')
 
 /bin/sh -i
 
-#perl
+# perl
 perl -e 'exec "/bin/sh";'
 perl: exec "/bin/sh";
 
-#ruby
+# ruby
 exec "/bin/sh"
 ruby -e 'exec "/bin/sh"'
 
-#lua
+# lua
 lua -e "os.execute('/bin/sh')"
 
 # (From within IRB)
@@ -55,17 +55,17 @@ exec "/bin/sh"
 !sh
 
 # In Kali or elsewhere
-$ echo $TERM
-$ stty -a
+echo $TERM
+stty -a
 
-$ stty raw -echo
-$ fg
+stty raw -echo
+fg
 
 # In reverse shell
-$ reset
-$ export SHELL=bash
-$ export TERM=xterm-256color
-$ stty rows <num> columns <cols>
+reset
+export SHELL=bash
+export TERM=xterm-256color
+stty rows <num> columns <cols>
 
 # With script
 script /dev/null -c bash
