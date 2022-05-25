@@ -1,5 +1,6 @@
 # Extracting the **certificate** and **keys** from a **.pfx** file
 *Timelapse - hackthebox*
+
 The **.pfx** file, which is in a **PKCS#12** format, contains the SSL certificate (public keys) and the corresponding private keys. Sometimes, you might have to import the certificate and private keys separately in an unencrypted plain text format to use it on another system.
 ## Extract .crt and .key files from .pfx file
 
