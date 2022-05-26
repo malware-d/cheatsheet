@@ -7,7 +7,8 @@
     - smbmap -H 10.10.10.100 -R Folder
     - smbmap -H 10.10.10.100
     - smbclient -L 10.10.10.100
-    - nmap --script smb-enum-shares -p 139,445 10.10.10.100
+    - ls -1 /usr/share/nmap/scripts/smb*
+      nmap --script smb-enum-shares -p 139,445 10.10.10.100
     - crackmapexec smb 10.10.10.175 --shares
 ====================================================================================
 #Check for Vulnerabilities 
@@ -29,7 +30,7 @@
     - smb: \> prompt off
       smb: \> recurse on
       smb: \> mget *
-
+      
     - smb: \> recurse on
       smb: \> dir
 ======================================================================================
