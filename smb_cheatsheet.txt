@@ -15,6 +15,7 @@
     - nmap --script smb-vuln* -p 139,445 10.10.10.100
 ====================================================================================
 #session
+    - net use \\\\$ip\\IPC$ "" /u:""       (NULL SESSION - window)
     - smbclient \\\\10.10.10.100\\tmp      (NULL SESSION)
     - smbclient //10.10.10.100/tmp         (NULL SESSION)
     - rpcclient -U "" -N 10.10.10.100      (NULL SESSION) ( -U "" -null session, -N -no password)
