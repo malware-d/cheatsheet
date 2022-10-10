@@ -40,4 +40,4 @@ Enumerate local users
 ==================================================================================================
 #List Shares 
     - crackmapexec smb 10.10.10.175 --shares
-    - crackmapexec smb 192.168.215.104 -u 'Administrator' -p 'PASS' --sharess
+    - crackmapexec smb 192.168.215.104 -u 'Administrator' -p 'PASS' --shares
