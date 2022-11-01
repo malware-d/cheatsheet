@@ -18,9 +18,9 @@ kali@kali:~$ wpscan --update
 ```
 
 ## Enumeration Modes
-* `**Passive**:` scan with a small number of requests => avoid causing DOS server
-* `**Aggressive**:` scan with a large number of requests and continuously to the server
-* `**Mixed**:` Combined both
+* `Passive:` scan with a small number of requests => avoid causing DOS server
+* `Aggressive:` scan with a large number of requests and continuously to the server
+* `Mixed:` Combined both
 
 By default, **Mixed** mode is used.
 
@@ -50,7 +50,7 @@ kali@kali:~$ wpscan --url http://192.168.43.12/wordpress/ -e at –e ap –e u
 * <mark >`–e u`</mark>: enumerate all usernames of targeted website
 
 ## Brute-force password using WPScan
-After using the above command, we can generate a list of usernames and can try a brute-force password. You can use the wordlist **rockyou.txt**
+After using the above command, we can generate a list of usernames and can try a brute-force password. You can use the wordlist `rockyou.txt`
 ```console
 kali@kali:~$ wpscan --url http://192.168.43.12/wordpress/ -U user.txt -P rockyou.txt
 ```
@@ -67,7 +67,7 @@ kali@kali:~$ wpscan --url http://192.168.43.12/wordpress/ --proxy http://192.168
 ## Scanning with an HTTP Authentication enabled
 
 Many websites enable HTTP authentication so that they can hide some essential and critical information from unauthenticated users.
-We can use the **<mark`>--http-auth`</mark>** flag with our credentials.
+We can use the **`--http-auth`** flag with our credentials.
 ```console
 kali@kali:~$ wpscan --url http://192.168.43.12/wordpress/ --http-auth robot:123
 ```
