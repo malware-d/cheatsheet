@@ -73,7 +73,7 @@ By default Redis will use database 0. In order to dump for example database 1:
 10.129.31.62:6379> select 1
 OK
 
-#get keys
+# get keys
 10.129.31.62:6379> keys *
 1) "numb"
 2) "flag"
