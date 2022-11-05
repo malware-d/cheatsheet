@@ -91,7 +91,7 @@ To know the type of the key:
 # type of key
 10.129.31.62:6379> type <KEY>
 
-#get list items
+# get list items
 10.129.31.62:6379> lrange <keys> 0 -1
 
 #get hash items
