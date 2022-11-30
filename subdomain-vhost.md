@@ -70,6 +70,15 @@ wfuzz -H "Host: FUZZ.thetoppers.htb" --hw 1036 -w subdomains-top1million-5000.tx
 Result: s3.thetopper.htb
 
 # gobuster
+Gobuster is a brute-force scanner tool to enumerate directories, files, hidden dir, hidden files of websites, sub-domain and virtual host names. Gobuster is written in the Go programming language. 
+
+The gobuster's mechanism is a trial-and-error method of finding an answer to a solution. This innately means Gobuster is a “loud” enumerator that can be more easily detected by an Intrusion Detection System (IDS). Gobuster will not recursively enumerate directories, so it’s a good idea to run Gobuster again on any discovered directories.
+
+It has **three main modes** it can be used with:
+* **dir:** the classic directory brute-forcing mode
+* **dns:** DNS subdomain brute-forcing mode
+* **vhost:** virtual host brute-forcing mode (not the same as DNS!)
+  
 
 
 
