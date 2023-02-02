@@ -17,6 +17,23 @@ There are mainly 2 types of Virtual hosts:
 2. **Name-based Virtual Host:** several websites are hosted on the same IP. Mostly this type is widely and preferred in order to preserve IP space.
 
 *But when talking about `VHOST` we are generally talking about **Named-based Virtual hosts**.*
+
+## Why can we find sub-domain in the certificate?
+Sub-domains can be found in a certificate because the certificate is issued for a specific domain or a set of domains, including sub-domains. The certificate contains information about the domains that it covers, and it is used by the web server to establish an encrypted connection with clients. When a client requests a secure connection to a website, the web server sends the certificate to the client, which verifies that the certificate was issued by a trusted authority and that it covers the domain being accessed.
+
+A single certificate can cover multiple domains and sub-domains, which can reduce the costs and administrative overhead associated with managing multiple certificates. For example, a single certificate may cover the following domains and sub-domains:
+```console
+example.com
+www.example.com
+sub1.example.com
+sub2.example.com
+```
+The certificate will typically list all the domains and sub-domains that it covers in the "Subject Alternative Names" (SANs) field. This field allows a certificate to cover multiple domains and sub-domains without requiring a separate certificate for each one.
+
+By reviewing the certificate of a website, security researchers and penetration testers can often discover sub-domains that might not be immediately apparent through other means. This can help them to identify and assess potential security risks and vulnerabilities associated with the sub-domains. However, keep in mind that not all sub-domains may be accessible or of interest, and it is important to prioritize and scope the sub-domains that are tested based on their potential impact.
+![certificates contains subdomain](https://user-images.githubusercontent.com/90831245/216426672-656393ac-8a82-4967-9966-2b74e3c0e4ec.png)
+
+
 # [How does Gobuster brute force sub-domains in Vhost mode inside a private network like Hack The Box?](https://www.reddit.com/r/hackthebox/comments/nn6soh/how_does_gobuster_brute_force_subdomains_in_vhost/)
 
 The answer is ***`Host header`***
