@@ -12,4 +12,5 @@
         -d blackfield.local - domain name
         -dc dc01.blackfield.local - DC name (it won’t let you use an IP here)
         -ns 10.10.10.192 - use 10.10.10.192 as the DNS server
+
     
